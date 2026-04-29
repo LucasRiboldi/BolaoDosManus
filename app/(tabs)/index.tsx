@@ -53,18 +53,46 @@ export default function HomeScreen() {
     }
   };
 
+  const getBadge = (position: number) => {
+    switch (position) {
+      case 1:
+        return "🥇";
+      case 2:
+        return "🥈";
+      case 3:
+        return "🥉";
+      default:
+        return null;
+    }
+  };
+
   const renderRankingItem = ({ item, index }: { item: RankingEntry; index: number }) => {
     const isCurrentUser = item.userId === appUser?.id;
+    const badge = getBadge(item.position);
+    const isMedalist = item.position <= 3;
 
     return (
       <View
         className={`flex-row items-center px-4 py-3 border-b border-border ${
+          isMedalist ? "bg-primary bg-opacity-5" : ""
+        } ${
           isCurrentUser ? "bg-primary bg-opacity-10" : ""
         }`}
       >
-        <Text className="w-12 text-base font-bold text-foreground text-center">{item.position}º</Text>
+        {/* Badge */}
+        <View className="w-12 items-center justify-center">
+          {badge ? (
+            <Text className="text-2xl">{badge}</Text>
+          ) : (
+            <Text className="text-base font-bold text-foreground text-center">{item.position}º</Text>
+          )}
+        </View>
+
+        {/* User Info */}
         <View className="flex-1 gap-1">
-          <Text className={`text-base font-semibold ${isCurrentUser ? "text-primary" : "text-foreground"}`}>
+          <Text className={`text-base font-semibold ${
+            isCurrentUser ? "text-primary" : isMedalist ? "text-primary" : "text-foreground"
+          }`}>
             {item.userName}
             {isCurrentUser && " (Você)"}
           </Text>
@@ -72,7 +100,12 @@ export default function HomeScreen() {
             Grupos: {item.groupPoints} | Mata-Mata: {item.knockoutPoints}
           </Text>
         </View>
-        <Text className="text-lg font-bold text-primary">{item.totalPoints}</Text>
+
+        {/* Points */}
+        <View className="items-center">
+          {isMedalist && <Text className="text-xs font-bold text-primary mb-1">⭐</Text>}
+          <Text className="text-lg font-bold text-primary">{item.totalPoints}</Text>
+        </View>
       </View>
     );
   };
