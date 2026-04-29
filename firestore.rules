@@ -1,0 +1,55 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    function betsAreOpen() {
+      return !exists(/databases/$(database)/documents/settings/bets)
+        || get(/databases/$(database)/documents/settings/bets).data.locked != true;
+    }
+
+    match /rankings/{userId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.totalPoints == 0
+        && request.resource.data.exactScores == 0
+        && request.resource.data.correctResults == 0;
+      allow update, delete: if isAdmin();
+    }
+
+    match /users/{userId} {
+      allow create: if signedIn() && request.auth.uid == userId;
+      allow read, update: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    match /matches/{matchId} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    match /predictions/{predictionId} {
+      allow read: if signedIn()
+        && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if signedIn()
+        && betsAreOpen()
+        && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAdmin();
+    }
+
+    match /settings/{documentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
