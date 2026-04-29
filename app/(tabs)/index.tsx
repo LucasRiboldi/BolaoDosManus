@@ -73,126 +73,160 @@ export default function HomeScreen() {
 
     return (
       <View
-        className={`flex-row items-center px-4 py-3 border-b border-border ${
-          isMedalist ? "bg-primary bg-opacity-5" : ""
+        className={`flex-row items-center px-4 py-4 border-b border-white/10 ${
+          isMedalist ? "bg-yellow-400/5" : ""
         } ${
-          isCurrentUser ? "bg-primary bg-opacity-10" : ""
+          isCurrentUser ? "bg-blue-400/10 border-l-4 border-l-yellow-400" : ""
         }`}
       >
-        {/* Badge */}
-        <View className="w-12 items-center justify-center">
+        {/* Badge/Position */}
+        <View className="w-14 items-center justify-center">
           {badge ? (
-            <Text className="text-2xl">{badge}</Text>
+            <Text className="text-3xl">{badge}</Text>
           ) : (
-            <Text className="text-base font-bold text-foreground text-center">{item.position}º</Text>
+            <View className="bg-white/10 rounded-full w-10 h-10 items-center justify-center">
+              <Text className="text-sm font-bold text-white">{item.position}</Text>
+            </View>
           )}
         </View>
 
         {/* User Info */}
-        <View className="flex-1 gap-1">
+        <View className="flex-1 gap-1 ml-2">
           <Text className={`text-base font-semibold ${
-            isCurrentUser ? "text-primary" : isMedalist ? "text-primary" : "text-foreground"
+            isCurrentUser ? "text-yellow-400" : isMedalist ? "text-yellow-300" : "text-white"
           }`}>
             {item.userName}
             {isCurrentUser && " (Você)"}
           </Text>
-          <Text className="text-xs text-muted">
-            Grupos: {item.groupPoints} | Mata-Mata: {item.knockoutPoints}
-          </Text>
+          <View className="flex-row gap-3">
+            <Text className="text-xs text-blue-200">
+              ⚽ {item.groupPoints}
+            </Text>
+            <Text className="text-xs text-blue-200">
+              🏆 {item.knockoutPoints}
+            </Text>
+          </View>
         </View>
 
         {/* Points */}
         <View className="items-center">
-          {isMedalist && <Text className="text-xs font-bold text-primary mb-1">⭐</Text>}
-          <Text className="text-lg font-bold text-primary">{item.totalPoints}</Text>
+          <Text className="text-2xl font-bold text-yellow-400">{item.totalPoints}</Text>
+          <Text className="text-xs text-blue-200 mt-1">pts</Text>
         </View>
       </View>
     );
   };
 
   return (
-    <ScreenContainer className="bg-background">
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View className="gap-6">
-          {/* Header */}
-          <View className="bg-primary rounded-lg p-6 gap-4">
-            <View>
-              <Text className="text-base text-background opacity-80">Bem-vindo,</Text>
-              <Text className="text-3xl font-bold text-background">{appUser?.name}</Text>
-              {userPosition > 0 && (
-                <Text className="text-base text-background mt-2">
-                  Você está em <Text className="font-bold">{userPosition}º lugar</Text> com{" "}
-                  <Text className="font-bold">
-                    {ranking.find((r) => r.userId === appUser?.id)?.totalPoints || 0} pontos
-                  </Text>
-                </Text>
-              )}
+    <ScreenContainer containerClassName="bg-gradient-to-b from-blue-600 to-blue-900">
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+        <View className="gap-6 pb-8">
+          {/* Header com Saudação */}
+          <View className="px-6 pt-6">
+            <View className="flex-row justify-between items-start mb-4">
+              <View>
+                <Text className="text-sm text-blue-200">Bem-vindo de volta,</Text>
+                <Text className="text-3xl font-bold text-white mt-1">{appUser?.name?.split(' ')[0]}</Text>
+              </View>
+              <View className="w-10" />
             </View>
 
+            {/* Card de Posição */}
+            {userPosition > 0 && (
+              <View className="bg-gradient-to-r from-yellow-400 to-yellow-300 rounded-2xl p-4 mb-2">
+                <Text className="text-blue-900 text-xs font-semibold mb-2">SUA POSIÇÃO</Text>
+                <View className="flex-row justify-between items-end">
+                  <View>
+                    <Text className="text-blue-900 text-sm">Posição</Text>
+                    <Text className="text-4xl font-bold text-blue-900 mt-1">{userPosition}º</Text>
+                  </View>
+                  <View className="items-end">
+                    <Text className="text-blue-900 text-sm">Pontos</Text>
+                    <Text className="text-3xl font-bold text-blue-900 mt-1">
+                      {ranking.find((r) => r.userId === appUser?.id)?.totalPoints || 0}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            )}
+
             {/* Share Buttons */}
-            <View className="flex-row gap-2 mt-2">
+            <View className="flex-row gap-2 mt-4">
               <TouchableOpacity
-                className="flex-1 bg-background rounded py-2 items-center flex-row justify-center gap-2"
+                className="flex-1 bg-white/10 border border-white/20 rounded-xl py-3 items-center flex-row justify-center gap-2"
                 onPress={handleShareWhatsApp}
               >
                 <Text className="text-lg">💬</Text>
-                <Text className="text-xs font-semibold text-primary">WhatsApp</Text>
+                <Text className="text-xs font-semibold text-white">WhatsApp</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                className="flex-1 bg-background rounded py-2 items-center flex-row justify-center gap-2"
+                className="flex-1 bg-white/10 border border-white/20 rounded-xl py-3 items-center flex-row justify-center gap-2"
                 onPress={handleShareInstagram}
               >
                 <Text className="text-lg">📸</Text>
-                <Text className="text-xs font-semibold text-primary">Instagram</Text>
+                <Text className="text-xs font-semibold text-white">Instagram</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                className="flex-1 bg-background rounded py-2 items-center flex-row justify-center gap-2"
+                className="flex-1 bg-white/10 border border-white/20 rounded-xl py-3 items-center flex-row justify-center gap-2"
                 onPress={handleShareGeneral}
               >
-                <MaterialIcons name="share" size={16} color="#0a7ea4" />
-                <Text className="text-xs font-semibold text-primary">Compartilhar</Text>
+                <MaterialIcons name="share" size={16} color="#fff" />
+                <Text className="text-xs font-semibold text-white">Compartilhar</Text>
               </TouchableOpacity>
             </View>
           </View>
 
-          {/* Ranking Title */}
-          <View className="px-4">
-            <Text className="text-2xl font-bold text-foreground">Ranking</Text>
-            <Text className="text-sm text-muted mt-1">
+          {/* Ranking Section */}
+          <View className="px-6">
+            <Text className="text-2xl font-bold text-white mb-2">🏆 Ranking</Text>
+            <Text className="text-sm text-blue-200">
               {ranking.length} apostadores competindo
             </Text>
           </View>
 
           {/* Ranking List */}
           {loading ? (
-            <View className="items-center justify-center py-8">
-              <Text className="text-base text-muted">Carregando ranking...</Text>
+            <View className="items-center justify-center py-12">
+              <Text className="text-base text-blue-200">Carregando ranking...</Text>
             </View>
           ) : ranking.length > 0 ? (
-            <FlatList
-              data={ranking}
-              renderItem={renderRankingItem}
-              keyExtractor={(item) => item.userId}
-              scrollEnabled={false}
-              className="bg-surface rounded-lg overflow-hidden mx-4"
-            />
+            <View className="mx-6 bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+              <FlatList
+                data={ranking}
+                renderItem={renderRankingItem}
+                keyExtractor={(item) => item.userId}
+                scrollEnabled={false}
+              />
+            </View>
           ) : (
-            <View className="items-center justify-center py-8 px-4">
-              <Text className="text-base text-muted text-center">
-                Nenhum apostador registrado ainda. Seja o primeiro!
+            <View className="items-center justify-center py-12 px-6">
+              <Text className="text-lg text-blue-100 text-center font-semibold mb-2">
+                Sem apostadores ainda
+              </Text>
+              <Text className="text-sm text-blue-200 text-center">
+                Convide seus amigos para começar a competir!
               </Text>
             </View>
           )}
 
-          {/* Info Box */}
-          <View className="mx-4 bg-surface rounded-lg p-4 gap-2 mb-6">
-            <Text className="text-sm font-semibold text-foreground">Como funciona?</Text>
-            <Text className="text-xs text-muted leading-relaxed">
-              Faça suas apostas na fase de grupos (acerte o placar) e no mata-mata (escolha o vencedor). Ganhe pontos e
-              suba no ranking!
-            </Text>
+          {/* Info Card */}
+          <View className="mx-6 bg-white/5 border border-white/10 rounded-2xl p-4 gap-3">
+            <View className="flex-row gap-2 items-start">
+              <Text className="text-2xl">⚽</Text>
+              <View className="flex-1">
+                <Text className="text-white font-semibold text-sm">Fase de Grupos</Text>
+                <Text className="text-blue-200 text-xs mt-1">Acerte o placar para ganhar 10 pontos</Text>
+              </View>
+            </View>
+            <View className="flex-row gap-2 items-start">
+              <Text className="text-2xl">🏆</Text>
+              <View className="flex-1">
+                <Text className="text-white font-semibold text-sm">Mata-Mata</Text>
+                <Text className="text-blue-200 text-xs mt-1">Escolha o vencedor para ganhar 5 pontos</Text>
+              </View>
+            </View>
           </View>
         </View>
       </ScrollView>
