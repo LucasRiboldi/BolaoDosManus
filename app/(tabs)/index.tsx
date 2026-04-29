@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { ScrollView, Text, View, FlatList } from "react-native";
+import { ScrollView, Text, View, FlatList, TouchableOpacity, Alert } from "react-native";
 import { useAuth } from "@/lib/auth-context";
 import { useFirestore } from "@/hooks/use-firestore";
 import { RankingEntry } from "@/lib/types";
 import { ScreenContainer } from "@/components/screen-container";
+import { SharingService } from "@/lib/sharing-service";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function HomeScreen() {
   const { appUser } = useAuth();
@@ -22,6 +24,34 @@ export default function HomeScreen() {
   }, [subscribeToRanking]);
 
   const userPosition = ranking.findIndex((entry) => entry.userId === appUser?.id) + 1;
+  const userRanking = ranking.find((r) => r.userId === appUser?.id);
+
+  const handleShareWhatsApp = async () => {
+    if (!userRanking) return;
+    try {
+      await SharingService.shareToWhatsApp(userRanking, ranking);
+    } catch (error) {
+      Alert.alert("Erro", "Falha ao compartilhar no WhatsApp");
+    }
+  };
+
+  const handleShareInstagram = async () => {
+    if (!userRanking) return;
+    try {
+      await SharingService.shareToInstagram(userRanking);
+    } catch (error) {
+      Alert.alert("Erro", "Falha ao compartilhar no Instagram");
+    }
+  };
+
+  const handleShareGeneral = async () => {
+    if (!userRanking) return;
+    try {
+      await SharingService.shareRanking(userRanking, ranking);
+    } catch (error) {
+      Alert.alert("Erro", "Falha ao compartilhar");
+    }
+  };
 
   const renderRankingItem = ({ item, index }: { item: RankingEntry; index: number }) => {
     const isCurrentUser = item.userId === appUser?.id;
@@ -52,17 +82,46 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View className="gap-6">
           {/* Header */}
-          <View className="bg-primary rounded-lg p-6 gap-2">
-            <Text className="text-base text-background opacity-80">Bem-vindo,</Text>
-            <Text className="text-3xl font-bold text-background">{appUser?.name}</Text>
-            {userPosition > 0 && (
-              <Text className="text-base text-background mt-2">
-                Você está em <Text className="font-bold">{userPosition}º lugar</Text> com{" "}
-                <Text className="font-bold">
-                  {ranking.find((r) => r.userId === appUser?.id)?.totalPoints || 0} pontos
+          <View className="bg-primary rounded-lg p-6 gap-4">
+            <View>
+              <Text className="text-base text-background opacity-80">Bem-vindo,</Text>
+              <Text className="text-3xl font-bold text-background">{appUser?.name}</Text>
+              {userPosition > 0 && (
+                <Text className="text-base text-background mt-2">
+                  Você está em <Text className="font-bold">{userPosition}º lugar</Text> com{" "}
+                  <Text className="font-bold">
+                    {ranking.find((r) => r.userId === appUser?.id)?.totalPoints || 0} pontos
+                  </Text>
                 </Text>
-              </Text>
-            )}
+              )}
+            </View>
+
+            {/* Share Buttons */}
+            <View className="flex-row gap-2 mt-2">
+              <TouchableOpacity
+                className="flex-1 bg-background rounded py-2 items-center flex-row justify-center gap-2"
+                onPress={handleShareWhatsApp}
+              >
+                <Text className="text-lg">💬</Text>
+                <Text className="text-xs font-semibold text-primary">WhatsApp</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                className="flex-1 bg-background rounded py-2 items-center flex-row justify-center gap-2"
+                onPress={handleShareInstagram}
+              >
+                <Text className="text-lg">📸</Text>
+                <Text className="text-xs font-semibold text-primary">Instagram</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                className="flex-1 bg-background rounded py-2 items-center flex-row justify-center gap-2"
+                onPress={handleShareGeneral}
+              >
+                <MaterialIcons name="share" size={16} color="#0a7ea4" />
+                <Text className="text-xs font-semibold text-primary">Compartilhar</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           {/* Ranking Title */}

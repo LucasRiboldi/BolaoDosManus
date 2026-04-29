@@ -74,3 +74,35 @@
 - [ ] Testar em dispositivo real
 - [ ] Otimização de performance
 - [ ] Tratamento de erros de rede
+
+
+## Novas Funcionalidades - Recomendações
+
+### Integração API-Football
+- [x] Configurar chave da API-Football
+- [x] Criar serviço para buscar resultados das partidas
+- [x] Atualizar placar das partidas em tempo real
+- [x] Sincronizar com Firestore
+- [ ] Calcular pontos automaticamente quando resultado é confirmado
+
+### Notificações Push
+- [x] Configurar Firebase Cloud Messaging (FCM)
+- [x] Criar serviço de notificações
+- [x] Agendar notificações 1 hora antes de cada partida
+- [x] Notificações quando resultado é confirmado
+- [x] Notificações de mudanças no ranking
+
+### Compartilhamento Social
+- [x] Botão de compartilhamento no ranking
+- [x] Integração com WhatsApp
+- [x] Integração com Instagram
+- [x] Gerar texto/imagem com ranking para compartilhar
+- [x] Deep link para convidar amigos
+
+### Painel Admin
+- [x] Tela de admin (acesso restrito)
+- [x] Upload de arquivo JSON com dados das partidas
+- [x] Validação do JSON
+- [x] Importar dados para Firestore
+- [x] Atualizar resultados manualmente
+- [ ] Visualizar logs de importação
