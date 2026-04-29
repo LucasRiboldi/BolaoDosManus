@@ -32,7 +32,7 @@ const env = {
   appSlug: "bolao-copa-2026",
   // S3 URL of the app logo - set this to the URL returned by generate_image when creating custom logo
   // Leave empty to use the default icon from assets/images/icon.png
-  logoUrl: "",
+  logoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663409421274/j3psjQVMAGPihA6xzdinTv/icon-e4jRZ3NtnjjhVvD3qDRZoN.webp",
   scheme: schemeFromBundleId,
   iosBundleId: bundleId,
   androidPackage: bundleId,

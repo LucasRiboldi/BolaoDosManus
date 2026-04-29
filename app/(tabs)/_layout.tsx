@@ -5,6 +5,8 @@ import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Platform } from "react-native";
 import { useColors } from "@/hooks/use-colors";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useAuth } from "@/lib/auth-context";
 
 export default function TabLayout() {
   const colors = useColors();
@@ -31,8 +33,29 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Ranking",
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="groups"
+        options={{
+          title: "Grupos",
+          tabBarIcon: ({ color }) => <MaterialIcons name="sports-soccer" size={28} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="knockout"
+        options={{
+          title: "Mata-Mata",
+          tabBarIcon: ({ color }) => <MaterialIcons name="emoji-events" size={28} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Perfil",
+          tabBarIcon: ({ color }) => <MaterialIcons name="person" size={28} color={color} />,
         }}
       />
     </Tabs>
