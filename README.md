@@ -1,139 +1,177 @@
-# ⚽ Bolão Copa 2026
+# 🏆 Bolão dos Manus - Copa do Mundo 2026
 
-Um aplicativo mobile de bolão para a Copa do Mundo de 2026, desenvolvido com React Native, Expo e Firebase.
+> Uma plataforma completa de bolão para a Copa do Mundo 2026, desenvolvida com React Native e Firebase
 
-## 🎯 Funcionalidades
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Expo](https://img.shields.io/badge/Expo-54.0-000.svg?style=flat&logo=expo)](https://expo.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-Latest-orange.svg?style=flat&logo=firebase)](https://firebase.google.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 
-### Autenticação e Usuários
-- ✅ Login e registro com Firebase Auth
-- ✅ Persistência de sessão
-- ✅ Perfil do usuário com histórico
+## 📋 Visão Geral
 
-### Ranking em Tempo Real
-- ✅ Ranking global atualizado automaticamente
-- ✅ Badges para 1º, 2º e 3º colocados (🥇 🥈 🥉)
-- ✅ Pontos por fase (Grupos e Mata-Mata)
-- ✅ Destaque visual para o usuário atual
+**Bolão dos Manus** é um aplicativo mobile que permite aos usuários fazer apostas em partidas da Copa do Mundo 2026, acompanhar seu ranking em tempo real, visualizar histórico de apostas e compartilhar resultados em redes sociais.
 
-### Apostas - Fase de Grupos
-- ✅ Interface de entrada de gols (estilo Excel)
-- ✅ Seletor de grupos (A-H)
-- ✅ Visualização de todas as partidas
-- ✅ Salvamento automático no Firestore
-- ✅ Indicador de apostas confirmadas
+O aplicativo sincroniza automaticamente com a API-Football para obter resultados reais, calcula pontos automaticamente e envia notificações push para manter os usuários engajados.
 
-### Apostas - Mata-Mata
-- ✅ Seleção de vencedor por partida
-- ✅ Seletor de rodadas (32, 16, QF, SF, Final)
-- ✅ Visualização do bracket
-- ✅ Salvamento automático no Firestore
+## ✨ Principais Funcionalidades
 
-### Histórico de Apostas
-- ✅ Visualização de todas as apostas do usuário
-- ✅ Status de cada aposta (Acerto Exato, Acerto Parcial, Pendente, Errou)
-- ✅ Pontos ganhos/perdidos por aposta
-- ✅ Separação por fase (Grupos/Mata-Mata)
+### 🔐 Autenticação e Gerenciamento de Usuários
+- Registro e login com Firebase Authentication
+- Persistência segura de sessão
+- Perfil de usuário com histórico completo
+- Logout seguro
 
-### Cálculo Automático de Pontos
-- ✅ Sincronização com API-Football para resultados reais
-- ✅ Cálculo automático de pontos quando resultado é confirmado
-- ✅ Atualização em tempo real do ranking
-- ✅ Regras de pontuação:
-  - Acerto exato (placar correto): 10 pontos
-  - Acerto de vencedor: 5 pontos
-  - Mata-mata (vencedor correto): 10 pontos
+### 🏅 Ranking em Tempo Real
+- Ranking global atualizado automaticamente
+- **Badges especiais para top 3** (🥇 🥈 🥉)
+- Pontos separados por fase (Grupos e Mata-Mata)
+- Destaque visual do usuário atual
+- Atualização em tempo real via Firestore
 
-### Compartilhamento Social
-- ✅ Compartilhar ranking no WhatsApp
-- ✅ Compartilhar no Instagram
-- ✅ Compartilhamento nativo (iOS/Android)
-- ✅ Deep links para convidar amigos
+### ⚽ Apostas - Fase de Grupos
+- Interface intuitiva de entrada de gols (estilo planilha Excel)
+- Seletor de grupos (A-H)
+- Visualização de todas as 64 partidas da fase de grupos
+- Salvamento automático no Firestore
+- Indicador visual de apostas confirmadas
+- Bloqueio de edição após início da partida
 
-### Notificações Push
-- ✅ Lembretes 1 hora antes de cada partida
-- ✅ Notificações de resultados
-- ✅ Notificações de mudanças no ranking
-- ✅ Integração com Firebase Cloud Messaging
+### 🏆 Apostas - Mata-Mata
+- Seleção de vencedor por partida
+- Seletor de rodadas (32, 16, QF, SF, Final)
+- Visualização do bracket completo
+- Atualização em cascata (vencedor avança automaticamente)
+- Salvamento automático no Firestore
 
-### Painel Admin
-- ✅ Upload de arquivo JSON com dados das partidas
-- ✅ Validação automática de dados
-- ✅ Importação em lote para Firestore
-- ✅ Acesso restrito por email
+### 📊 Histórico de Apostas
+- Visualização completa de todas as apostas do usuário
+- Status detalhado de cada aposta:
+  - ✅ Acerto Exato (10 pontos)
+  - ⚠️ Acerto Parcial (5 pontos)
+  - ⏳ Pendente (aguardando resultado)
+  - ❌ Errou (0 pontos)
+- Separação por fase (Grupos/Mata-Mata)
+- Filtros e busca
+- Pontos ganhos/perdidos por aposta
 
-## 🛠️ Tech Stack
+### 🤖 Cálculo Automático de Pontos
+- Sincronização em tempo real com API-Football
+- Cálculo automático quando resultado é confirmado
+- Atualização instantânea do ranking
+- Regras de pontuação transparentes:
+  - **Fase de Grupos**: Acerto exato (10 pts) | Acerto de vencedor (5 pts)
+  - **Mata-Mata**: Vencedor correto (10 pts)
 
-- **Frontend**: React Native com Expo SDK 54
-- **Styling**: NativeWind (Tailwind CSS)
-- **Autenticação**: Firebase Auth
-- **Database**: Firestore (NoSQL)
-- **API**: API-Football para resultados reais
-- **Notificações**: Expo Notifications + Firebase Cloud Messaging
-- **Linguagem**: TypeScript
-- **Roteamento**: Expo Router
+### 📱 Compartilhamento Social
+- Compartilhar ranking no **WhatsApp** com emojis e formatação
+- Compartilhar no **Instagram** (Stories/Feed)
+- Compartilhamento nativo (iOS/Android)
+- Deep links para convidar amigos
+- Texto personalizado com posição e pontos
 
-## 📱 Estrutura do Projeto
+### 🔔 Notificações Push
+- Lembretes 1 hora antes de cada partida
+- Notificações de resultados confirmados
+- Notificações de mudanças no ranking
+- Integração com Firebase Cloud Messaging
+- Customizável por usuário
+
+### 👨‍💼 Painel Admin
+- Upload de arquivo JSON com dados das partidas
+- Validação automática de dados
+- Importação em lote para Firestore
+- Acesso restrito por email
+- Exemplo de JSON fornecido na interface
+- Logs de importação
+
+## 🛠️ Stack Tecnológico
+
+| Tecnologia | Versão | Propósito |
+|-----------|--------|----------|
+| **React Native** | 0.81 | Framework mobile |
+| **Expo SDK** | 54 | Plataforma de desenvolvimento |
+| **TypeScript** | 5.9 | Tipagem estática |
+| **Firebase Auth** | Latest | Autenticação |
+| **Firestore** | Latest | Banco de dados NoSQL |
+| **Firebase Messaging** | Latest | Notificações push |
+| **NativeWind** | 4.2 | Tailwind CSS para React Native |
+| **Expo Router** | 6 | Roteamento |
+| **API-Football** | Latest | Dados de partidas em tempo real |
+
+## 📁 Estrutura do Projeto
 
 ```
 bolao-copa-2026/
-├── app/
-│   ├── (tabs)/
-│   │   ├── index.tsx          # Tela de Ranking
-│   │   ├── groups.tsx         # Apostas Fase de Grupos
-│   │   ├── knockout.tsx       # Apostas Mata-Mata
-│   │   ├── history.tsx        # Histórico de Apostas
-│   │   ├── profile.tsx        # Perfil do Usuário
-│   │   └── _layout.tsx        # Layout com abas
-│   ├── login.tsx              # Tela de Login
-│   ├── register.tsx           # Tela de Registro
-│   ├── admin.tsx              # Painel Admin
-│   └── _layout.tsx            # Layout raiz
-├── lib/
-│   ├── firebase.ts            # Configuração Firebase
-│   ├── types.ts               # Tipos TypeScript
-│   ├── auth-context.tsx       # Contexto de autenticação
-│   ├── api-football-service.ts # Serviço API-Football
-│   ├── auto-scoring-service.ts # Cálculo automático de pontos
-│   ├── notifications-service.ts # Serviço de notificações
-│   ├── sharing-service.ts     # Serviço de compartilhamento
-│   ├── scoring-service.ts     # Lógica de pontuação
-│   └── world-cup-data.ts      # Dados da Copa 2026
-├── hooks/
-│   ├── use-auth.ts            # Hook de autenticação
-│   ├── use-firestore.ts       # Hook do Firestore
-│   ├── use-match-results.ts   # Hook para sincronizar resultados
-│   └── use-colors.ts          # Hook de cores do tema
-├── components/
-│   ├── screen-container.tsx   # Wrapper de tela
-│   ├── themed-view.tsx        # View com tema
+├── 📱 app/
+│   ├── (tabs)/                    # Abas principais
+│   │   ├── index.tsx              # 🏆 Ranking
+│   │   ├── groups.tsx             # ⚽ Apostas Grupos
+│   │   ├── knockout.tsx           # 🏆 Apostas Mata-Mata
+│   │   ├── history.tsx            # 📊 Histórico
+│   │   ├── profile.tsx            # 👤 Perfil
+│   │   └── _layout.tsx            # Layout com abas
+│   ├── login.tsx                  # 🔐 Login
+│   ├── register.tsx               # 📝 Registro
+│   ├── admin.tsx                  # 👨‍💼 Painel Admin
+│   └── _layout.tsx                # Layout raiz
+│
+├── 📚 lib/
+│   ├── firebase.ts                # ⚙️ Configuração Firebase
+│   ├── types.ts                   # 📋 Tipos TypeScript
+│   ├── auth-context.tsx           # 🔐 Contexto de autenticação
+│   ├── api-football-service.ts    # ⚽ Integração API-Football
+│   ├── auto-scoring-service.ts    # 🤖 Cálculo automático de pontos
+│   ├── notifications-service.ts   # 🔔 Serviço de notificações
+│   ├── sharing-service.ts         # 📱 Compartilhamento social
+│   ├── scoring-service.ts         # 📊 Lógica de pontuação
+│   └── world-cup-data.ts          # 🌍 Dados da Copa 2026
+│
+├── 🎣 hooks/
+│   ├── use-auth.ts                # 🔐 Hook de autenticação
+│   ├── use-firestore.ts           # 🔥 Hook do Firestore
+│   ├── use-match-results.ts       # ⚽ Hook para sincronizar resultados
+│   └── use-colors.ts              # 🎨 Hook de cores
+│
+├── 🧩 components/
+│   ├── screen-container.tsx       # 📱 Wrapper de tela
+│   ├── themed-view.tsx            # 🎨 View com tema
 │   └── ui/
-│       └── icon-symbol.tsx    # Mapeamento de ícones
-├── assets/
+│       └── icon-symbol.tsx        # 🎯 Mapeamento de ícones
+│
+├── 🎨 assets/
 │   └── images/
-│       ├── icon.png           # Logo do app
-│       ├── splash-icon.png    # Ícone splash
-│       └── favicon.png        # Favicon web
-├── theme.config.js            # Configuração de cores
-├── tailwind.config.js         # Configuração Tailwind
-├── app.config.ts              # Configuração Expo
-├── package.json               # Dependências
-└── README.md                  # Este arquivo
+│       ├── icon.png               # Logo do app
+│       ├── splash-icon.png        # Ícone splash
+│       └── favicon.png            # Favicon web
+│
+├── ⚙️ Configuração
+│   ├── theme.config.js            # Paleta de cores
+│   ├── tailwind.config.js         # Tailwind CSS
+│   ├── app.config.ts              # Expo config
+│   └── package.json               # Dependências
+│
+└── 📖 Documentação
+    ├── README.md                  # Este arquivo
+    ├── CONTRIBUTING.md            # Guia de contribuição
+    └── LICENSE                    # MIT License
 ```
 
-## 🚀 Como Começar
+## 🚀 Quick Start
 
 ### Pré-requisitos
-- Node.js 18+
-- npm ou pnpm
-- Conta Firebase
-- Chave da API-Football (opcional, para resultados reais)
+```bash
+✓ Node.js 18+
+✓ npm ou pnpm
+✓ Conta Firebase (gratuita)
+✓ Chave API-Football (opcional)
+```
 
 ### Instalação
 
 1. **Clone o repositório**
 ```bash
-git clone https://github.com/seu-usuario/bolao-copa-2026.git
-cd bolao-copa-2026
+git clone https://github.com/LucasRiboldi/BolaoDosManus.git
+cd BolaoDosManus
 ```
 
 2. **Instale as dependências**
@@ -144,25 +182,30 @@ npm install
 ```
 
 3. **Configure o Firebase**
-   - Crie um projeto no [Firebase Console](https://console.firebase.google.com/)
-   - Habilite autenticação por email/senha
-   - Crie um banco de dados Firestore
-   - Copie as credenciais do Firebase
+
+   a. Crie um projeto em [Firebase Console](https://console.firebase.google.com/)
+   
+   b. Habilite:
+      - ✅ Authentication (Email/Password)
+      - ✅ Firestore Database
+      - ✅ Cloud Messaging
+   
+   c. Copie suas credenciais
 
 4. **Configure variáveis de ambiente**
 
-Crie um arquivo `.env.local` na raiz do projeto:
-```env
+```bash
+# .env.local
 EXPO_PUBLIC_FIREBASE_API_KEY=sua_chave_aqui
-EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=seu_dominio.firebaseapp.com
+EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=seu_projeto.firebaseapp.com
 EXPO_PUBLIC_FIREBASE_PROJECT_ID=seu_projeto_id
-EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=seu_bucket.appspot.com
+EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=seu_projeto.appspot.com
 EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=seu_sender_id
 EXPO_PUBLIC_FIREBASE_APP_ID=seu_app_id
 EXPO_PUBLIC_API_FOOTBALL_KEY=sua_chave_api_football
 ```
 
-5. **Inicie o servidor de desenvolvimento**
+5. **Inicie o servidor**
 ```bash
 pnpm dev
 # ou
@@ -170,9 +213,16 @@ npm run dev
 ```
 
 6. **Abra em um dispositivo**
-   - iOS: `pnpm ios`
-   - Android: `pnpm android`
-   - Web: Acesse `http://localhost:8081`
+```bash
+# iOS
+pnpm ios
+
+# Android
+pnpm android
+
+# Web
+pnpm web
+```
 
 ## 📊 Estrutura de Dados (Firestore)
 
@@ -180,11 +230,11 @@ npm run dev
 ```json
 {
   "id": "user_id",
-  "name": "Nome do Usuário",
-  "email": "user@example.com",
-  "totalPoints": 150,
-  "groupPoints": 100,
-  "knockoutPoints": 50,
+  "name": "João Silva",
+  "email": "joao@example.com",
+  "totalPoints": 250,
+  "groupPoints": 150,
+  "knockoutPoints": 100,
   "position": 1,
   "createdAt": "2026-01-01T00:00:00Z",
   "updatedAt": "2026-04-29T10:00:00Z"
@@ -222,93 +272,94 @@ npm run dev
 
 ## 🎮 Como Usar
 
-### 1. Registre-se
-- Acesse a tela de registro
-- Preencha nome, email e senha
-- Clique em "Criar Conta"
+### 1️⃣ Registre-se
+```
+Tela de Registro → Preencha dados → Criar Conta
+```
 
-### 2. Faça Apostas na Fase de Grupos
-- Acesse a aba "Grupos"
-- Selecione um grupo (A-H)
-- Preencha os gols para cada partida
-- Clique em "Confirmar Aposta"
+### 2️⃣ Faça Apostas na Fase de Grupos
+```
+Aba "Grupos" → Selecione grupo (A-H) → 
+Preencha gols → Confirmar Aposta
+```
 
-### 3. Faça Apostas no Mata-Mata
-- Acesse a aba "Mata-Mata"
-- Selecione uma rodada
-- Escolha o time que passa de fase
-- Clique em "Confirmar Aposta"
+### 3️⃣ Faça Apostas no Mata-Mata
+```
+Aba "Mata-Mata" → Selecione rodada → 
+Escolha vencedor → Confirmar Aposta
+```
 
-### 4. Acompanhe seu Ranking
-- Acesse a aba "Ranking"
-- Veja sua posição e pontos
-- Compartilhe no WhatsApp ou Instagram
+### 4️⃣ Acompanhe Ranking
+```
+Aba "Ranking" → Veja posição e pontos → 
+Compartilhe no WhatsApp/Instagram
+```
 
-### 5. Revise seu Histórico
-- Acesse a aba "Histórico"
-- Veja todas as suas apostas
-- Acompanhe os pontos ganhos/perdidos
+### 5️⃣ Revise Histórico
+```
+Aba "Histórico" → Veja todas as apostas → 
+Acompanhe pontos ganhos/perdidos
+```
 
-## 🔐 Regras de Segurança do Firestore
+## 📈 Regras de Pontuação
+
+| Cenário | Pontos | Fase |
+|---------|--------|------|
+| Acerto exato (placar correto) | 10 | Grupos |
+| Acerto de vencedor | 5 | Grupos |
+| Vencedor correto | 10 | Mata-Mata |
+| Resultado incorreto | 0 | Ambas |
+
+## 🔐 Regras de Segurança (Firestore)
 
 ```javascript
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Usuários podem ler/escrever apenas seus próprios dados
+    // Usuários: apenas seus próprios dados
     match /users/{userId} {
       allow read, write: if request.auth.uid == userId;
     }
     
-    // Apostas de grupos
+    // Apostas: autenticados podem ler/escrever
     match /groupBets/{document=**} {
       allow read, write: if request.auth != null;
     }
     
-    // Apostas de mata-mata
     match /knockoutBets/{document=**} {
       allow read, write: if request.auth != null;
     }
     
-    // Partidas (apenas leitura)
+    // Partidas: apenas leitura
     match /matches/{document=**} {
       allow read: if request.auth != null;
-      allow write: if false; // Apenas admin pode escrever
+      allow write: if false;
     }
   }
 }
 ```
 
-## 📝 Regras de Pontuação
-
-### Fase de Grupos
-- **Acerto Exato**: Placar correto = 10 pontos
-- **Acerto Parcial**: Vencedor correto = 5 pontos
-- **Errou**: Resultado diferente = 0 pontos
-
-### Mata-Mata
-- **Acerto**: Time vencedor correto = 10 pontos
-- **Errou**: Time vencedor incorreto = 0 pontos
-
 ## 🔄 Sincronização com API-Football
 
-O aplicativo sincroniza automaticamente com a API-Football a cada 5 minutos para:
-- Buscar resultados das partidas
-- Atualizar placares
-- Calcular pontos automaticamente
-- Atualizar ranking em tempo real
+O app sincroniza automaticamente a cada 5 minutos:
+- ⚽ Busca resultados das partidas
+- 📊 Atualiza placares
+- 🤖 Calcula pontos automaticamente
+- 🏅 Atualiza ranking em tempo real
 
-## 📧 Painel Admin
+## 👨‍💼 Painel Admin
 
-Apenas usuários com emails autorizados podem acessar o painel admin em `/admin`.
+Apenas emails autorizados podem acessar `/admin`
 
-### Como usar:
-1. Acesse `/admin` (se autorizado)
-2. Clique em "Selecionar Arquivo JSON"
-3. Escolha um arquivo JSON com dados das partidas
-4. O sistema valida e importa automaticamente
+### Uso:
+```
+1. Acesse /admin
+2. Clique "Selecionar Arquivo JSON"
+3. Escolha arquivo com dados das partidas
+4. Sistema valida e importa automaticamente
+```
 
-### Formato do JSON:
+### Formato JSON:
 ```json
 {
   "matches": [
@@ -330,47 +381,99 @@ Apenas usuários com emails autorizados podem acessar o painel admin em `/admin`
 
 ## 🐛 Troubleshooting
 
-### Problema: "Chave da API-Football inválida"
-- Verifique se a chave está correta em `.env.local`
-- Teste a chave no [site da API-Football](https://www.api-football.com/)
+| Problema | Solução |
+|----------|---------|
+| API-Football inválida | Verifique chave em `.env.local` |
+| Notificações não funcionam | Verifique permissões do SO |
+| Firestore não conecta | Valide credenciais e regras |
+| Erro de build | Limpe `node_modules` e reinstale |
 
-### Problema: Notificações não funcionam
-- Certifique-se de que as permissões foram concedidas
-- No iOS, verifique Configurações > Notificações
-- No Android, verifique Configurações > Aplicativos > Bolão Copa 2026
+## 📦 Scripts Disponíveis
 
-### Problema: Firestore não conecta
-- Verifique as credenciais do Firebase
-- Certifique-se de que o Firestore está habilitado
-- Verifique as regras de segurança do Firestore
+```bash
+# Desenvolvimento
+pnpm dev              # Inicia servidor de desenvolvimento
+pnpm dev:metro       # Apenas Metro bundler
+pnpm dev:server      # Apenas servidor
 
-## 📄 Licença
+# Build
+pnpm build           # Build para produção
+pnpm start           # Inicia servidor de produção
 
-Este projeto está licenciado sob a MIT License - veja o arquivo LICENSE para detalhes.
+# Qualidade de código
+pnpm lint            # Executa ESLint
+pnpm format          # Formata com Prettier
+pnpm check           # Verifica tipos TypeScript
+pnpm test            # Executa testes
+
+# Banco de dados
+pnpm db:push         # Sincroniza schema com banco
+
+# Mobile
+pnpm ios             # Abre no iOS
+pnpm android         # Abre no Android
+pnpm qr              # Gera QR code
+```
 
 ## 🤝 Contribuindo
 
 Contribuições são bem-vindas! Por favor:
 
-1. Faça um Fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+1. **Fork** o projeto
+2. **Crie uma branch** para sua feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** para a branch (`git push origin feature/AmazingFeature`)
+5. **Abra um Pull Request**
 
-## 📞 Suporte
+Veja [CONTRIBUTING.md](CONTRIBUTING.md) para mais detalhes.
 
-Para dúvidas ou sugestões, abra uma issue no GitHub ou entre em contato através do email.
+## 📝 Licença
+
+Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ## 🙏 Agradecimentos
 
 - [Expo](https://expo.dev/) - Framework React Native
 - [Firebase](https://firebase.google.com/) - Backend e autenticação
-- [API-Football](https://www.api-football.com/) - Dados das partidas
+- [API-Football](https://www.api-football.com/) - Dados de partidas
 - [NativeWind](https://www.nativewind.dev/) - Tailwind CSS para React Native
+- [React Native](https://reactnative.dev/) - Framework mobile
+
+## 📞 Suporte
+
+- 📧 Email: support@bolao.com
+- 🐛 Issues: [GitHub Issues](https://github.com/LucasRiboldi/BolaoDosManus/issues)
+- 💬 Discussões: [GitHub Discussions](https://github.com/LucasRiboldi/BolaoDosManus/discussions)
+
+## 🎯 Roadmap
+
+- [ ] Integração com redes sociais (login)
+- [ ] Sistema de ligas privadas
+- [ ] Desafios entre amigos
+- [ ] Estatísticas detalhadas
+- [ ] Modo offline
+- [ ] Suporte a múltiplos idiomas
+- [ ] App nativa iOS/Android (EAS Build)
+
+## 📊 Estatísticas
+
+- **Linhas de Código**: ~5000+
+- **Componentes**: 20+
+- **Telas**: 8
+- **Funcionalidades**: 15+
+- **Tempo de Desenvolvimento**: Desenvolvido com ❤️
 
 ---
 
-**Desenvolvido com ❤️ para a Copa do Mundo 2026**
+<div align="center">
+
+**[⬆ Voltar ao Topo](#-bolão-dos-manus---copa-do-mundo-2026)**
+
+Desenvolvido com ❤️ para a Copa do Mundo 2026
 
 ⚽ Boa sorte nas suas apostas! 🍀
+
+[![GitHub Stars](https://img.shields.io/github/stars/LucasRiboldi/BolaoDosManus?style=social)](https://github.com/LucasRiboldi/BolaoDosManus)
+[![GitHub Forks](https://img.shields.io/github/forks/LucasRiboldi/BolaoDosManus?style=social)](https://github.com/LucasRiboldi/BolaoDosManus)
+
+</div>
